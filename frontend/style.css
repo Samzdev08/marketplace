@@ -56,6 +56,7 @@ nav a {
 }
 
 .active-nav {
+    transition: 0.4s;
     padding: 10px 15px;
     background-color: #252218;
     color: #c9a84c;
@@ -65,7 +66,8 @@ nav a {
 
 main {
     padding: 0 15% 0 15%;
-    height: 80vh;
+    min-height: 80vh; 
+    flex: 1; 
 }
 
 .hero {
@@ -170,9 +172,8 @@ main {
 
 .card-display {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 500px;
-     align-items: stretch;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 26px;
 }
 .card-product {
     display: flex;             
@@ -194,6 +195,7 @@ main {
 
 .card-product img {
     width: 100%;
+    border-radius: var(--r);
     height: 200px;
     object-fit: cover;
 }
@@ -257,6 +259,7 @@ footer {
     text-align: center;
     color: var(--muted);
     font-size: 13px;
+    margin: auto;
 }
 footer p{
 
@@ -318,7 +321,8 @@ footer p{
 
 .page-box input[type="email"],
 .page-box input[type="password"],
-.page-box input[type="text"] {
+.page-box input[type="text"],
+.page-box input[type="file"]  {
     width: 100%;
     background: var(--bg);
     border: 1px solid var(--border);
@@ -420,6 +424,7 @@ footer p{
 
 .field input[type="text"],
 .field input[type="number"],
+.field input[type="file"],
 .field select,
 .field textarea {
     background: var(--surface);

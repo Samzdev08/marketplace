@@ -7,6 +7,7 @@
     <link rel="icon" href="data:,">
     <title>Bazar</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -41,7 +42,7 @@
         </div>
         <div class="product-container">
             <div class="filter-container">
-                <input type="text" placeholder="Rechercher…">
+                <input id="home-search" type="text" placeholder="Rechercher…">
                 <ul class="filter-tags">
                     <li class="active">Tous</li>
                     <li>Électronique</li>
@@ -52,50 +53,13 @@
                     <li>Livres</li>
                     <li>Autre</li>
                 </ul>
-                <select>
+                <select id="home-sort">
                     <option value="recent">Plus récents</option>
                     <option value="price_asc">Prix croissant</option>
                     <option value="price_desc">Prix décroissant</option>
                 </select>
             </div>
             <div class="card-display">
-                <div class="card-product">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUKLFCm6I7Jbte7PfL5FtXvhOuevJnccJVPA&s" alt="logo">
-                    <span class="categorie">Mode</span>
-                    <div class="infos-text">
-                        <p class="title">Collection Harry Potter complète</p>
-                        <p class="desc">Veste en cuir véritable, taille M, très bon état.</p>
-                    </div>
-                    <div class="numb-text">
-                        <p class="price">85.00 CHF</p>
-                        <p class="seller">Par Marie Antoinette</p>
-                    </div>
-                </div>
-                 <div class="card-product">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUKLFCm6I7Jbte7PfL5FtXvhOuevJnccJVPA&s" alt="logo">
-                    <span class="categorie">Mode</span>
-                    <div class="infos-text">
-                        <p class="title">Collection Harry Potter complète</p>
-                        <p class="desc">Veste en cuir véritable, taille M, très bon état.</p>
-                    </div>
-                    <div class="numb-text">
-                        <p class="price">85.00 CHF</p>
-                        <p class="seller">Par Marie Antoinette</p>
-                    </div>
-                </div>
-                 <div class="card-product">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUKLFCm6I7Jbte7PfL5FtXvhOuevJnccJVPA&s" alt="logo">
-                    <span class="categorie">Mode</span>
-                    <div class="infos-text">
-                        <p class="title">Collection Harry Potter complète</p>
-                        <p class="desc">Veste en cuir véritable, taille M, très bon état.</p>
-                    </div>
-                    <div class="numb-text">
-                        <p class="price">85.00 CHF</p>
-                        <p class="seller">Par Marie Antoinette</p>
-                    </div>
-                </div>
-                
             </div>
           <!--  <p style="color:#666; text-align:center; margin-top:2rem;">Aucun article pour l'instant.</p> -->
             
@@ -107,21 +71,21 @@
             <h2 style="font-size:36px;margin-bottom:8px;">Publier un article</h2>
             <p class="subtitle">Remplissez les informations ci-dessous</p>
 
-            <form class="form">
+            <form id="sell-form" class="form">
 
                 <div class="field">
                     <label>Titre *</label>
-                    <input type="text" placeholder="Appareil photo vintage Minolta X-700" />
+                    <input id="sell-title" type="text" placeholder="Appareil photo vintage Minolta X-700" />
                 </div>
 
                 <div class="row">
                     <div class="field">
                         <label>Prix * (CHF)</label>
-                        <input type="number" placeholder="120" />
+                        <input id="sell-price" type="number" placeholder="120" min="1"/>
                     </div>
                     <div class="field">
                         <label>Catégorie</label>
-                        <select>
+                        <select id="sell-category">
                             <option selected>Électronique</option>
                             <option>Mode</option>
                             <option>Maison</option>
@@ -135,14 +99,14 @@
 
                 <div class="field">
                     <label>Description</label>
-                    <textarea
+                    <textarea id="sell-description"
                         placeholder="Minolta X-700 en excellent état, livré avec objectif 50mm f/1.4. Quelques légères traces d'usure sur le boîtier mais optique impeccable."></textarea>
                     <p class="char-count">142 / 500 caractères</p>
                 </div>
 
                 <div class="field">
                     <label>URL de l'image (optionnel)</label>
-                    <input type="text"
+                    <input id="sell-image-url" type="file"
                         value="https://images.unsplash.com/photo-1452457807411-4979b707c5be?w=600&q=80" />
                 </div>
 
@@ -159,11 +123,11 @@
     <template id="login">
         <div class="page-box">
             <h2>Connexion</h2>
-            <form>
-                <label for="email">EMAIL</label>
-                <input type="email" placeholder="vous@example.com">
-                <label for="password">MOT DE PASSE</label>
-                <input type="password" placeholder="********">
+            <form id="login-form">
+                <label for="login-email">EMAIL</label>
+                <input id="login-email" type="email" placeholder="vous@example.com">
+                <label for="login-password">MOT DE PASSE</label>
+                <input id="login-password" type="password" placeholder="********">
                 <button type="submit">Se connecter</button>
                 <span>Pas de compte ? <a href="/register">S'inscrire</a></span>
             </form>
@@ -173,15 +137,15 @@
     <template id="register">
         <div class="page-box">
             <h2>Créer un compte</h2>
-            <form>
-                <label for="NOM COMPLET">NOM COMPLET</label>
-                <input type="text" placeholder="Jean Dupont">
-                <label for="email">EMAIL</label>
-                <input type="email" placeholder="vous@example.com">
-                <label for="password">MOT DE PASSE</label>
-                <input type="password" placeholder="Min. 6 caratères">
-                <label for="">CONFIRMER LE MOT DE PASSE</label>
-                <input type="password" placeholder="*****">
+            <form id="register-form">
+                <label for="register-fullname">NOM COMPLET</label>
+                <input id="register-fullname" type="text" placeholder="Jean Dupont">
+                <label for="register-email">EMAIL</label>
+                <input id="register-email" type="email" placeholder="vous@example.com">
+                <label for="register-password">MOT DE PASSE</label>
+                <input id="register-password" type="password" placeholder="Min. 6 caratères">
+                <label for="register-confirm-password">CONFIRMER LE MOT DE PASSE</label>
+                <input id="register-confirm-password" type="password" placeholder="*****">
                 <button type="submit">Créer mon compte</button>
                 <span>Deja un compte ? <a href="/login">Se connecter</a></span>
             </form>
@@ -215,15 +179,15 @@
                 <div class="edit-form">
                     <div>
                         <label>Nom</label>
-                        <input type="text" value="Sophie Martin" />
+                        <input id="profile-name" type="text" value="Sophie Martin" />
                     </div>
                     <div>
                         <label>Bio</label>
-                        <textarea>Passionnée de design et objets vintage. Je vends uniquement des articles que j'aime !</textarea>
+                        <textarea id="profile-bio">Passionnée de design et objets vintage. Je vends uniquement des articles que j'aime !</textarea>
                     </div>
                     <div>
                         <label>URL photo de profil</label>
-                        <input type="text" value="https://i.pravatar.cc/150?img=47" placeholder="https://…" />
+                        <input id="profile-avatar-url" type="file" value="https://i.pravatar.cc/150?img=47" placeholder="https://…" />
                     </div>
                     <button class="btn-gold">Enregistrer</button>
                 </div>
@@ -304,7 +268,7 @@
 
         </div>
     </template>
-    <script src="script.js"></script>
+    <script type="module" src="index.js"></script>
 </body>
 
 </html>
