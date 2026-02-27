@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:,">
+    <title>Bazar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-title">
+            <p data-link="/home">Bazar</p>
+        </div>
+        <nav>
+            <li><a href="/home" data-link="/home" class="active-nav">Parcourir</a></li>
+            <li><a href="/sell" data-link="/sell">Vendre</a></li>
+            <li><a href="/login" data-link="/login">Connexion</a></li>
+            <li><a href="/register" data-link="/register">S'inscrire</a></li>
+        </nav>
+    </header>
+
+    <main>
+        <div id="app"></div>
+    </main>
+
+    <footer>
+        <p>Bazar © 2025 — Marketplace de démonstration</p>
+    </footer>
+
+
+
+    <template id="home">
+        <div class="hero">
+            <h1 style="color: #f0e8d5;">Achetez &amp; vendez</h1>
+            <h1 style="color: #c9a84c;">l'extraordinaire.</h1>
+            <p style="font-family: 'DM Sans', sans-serif; font-size: 13px;">0 articles disponibles</p>
+        </div>
+        <div class="product-container">
+            <div class="filter-container">
+                <input type="text" placeholder="Rechercher…">
+                <ul class="filter-tags">
+                    <li class="active">Tous</li>
+                    <li>Électronique</li>
+                    <li>Mode</li>
+                    <li>Sport</li>
+                    <li>Maison</li>
+                    <li>Art</li>
+                    <li>Livres</li>
+                    <li>Autre</li>
+                </ul>
+                <select>
+                    <option value="recent">Plus récents</option>
+                    <option value="price_asc">Prix croissant</option>
+                    <option value="price_desc">Prix décroissant</option>
+                </select>
+            </div>
+            <div class="card-display">
+                <div class="card-product">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUKLFCm6I7Jbte7PfL5FtXvhOuevJnccJVPA&s" alt="logo">
+                    <span class="categorie">Mode</span>
+                    <div class="infos-text">
+                        <p class="title">Collection Harry Potter complète</p>
+                        <p class="desc">Veste en cuir véritable, taille M, très bon état.</p>
+                    </div>
+                    <div class="numb-text">
+                        <p class="price">85.00 CHF</p>
+                        <p class="seller">Par Marie Antoinette</p>
+                    </div>
+                </div>
+                 <div class="card-product">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUKLFCm6I7Jbte7PfL5FtXvhOuevJnccJVPA&s" alt="logo">
+                    <span class="categorie">Mode</span>
+                    <div class="infos-text">
+                        <p class="title">Collection Harry Potter complète</p>
+                        <p class="desc">Veste en cuir véritable, taille M, très bon état.</p>
+                    </div>
+                    <div class="numb-text">
+                        <p class="price">85.00 CHF</p>
+                        <p class="seller">Par Marie Antoinette</p>
+                    </div>
+                </div>
+                 <div class="card-product">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUKLFCm6I7Jbte7PfL5FtXvhOuevJnccJVPA&s" alt="logo">
+                    <span class="categorie">Mode</span>
+                    <div class="infos-text">
+                        <p class="title">Collection Harry Potter complète</p>
+                        <p class="desc">Veste en cuir véritable, taille M, très bon état.</p>
+                    </div>
+                    <div class="numb-text">
+                        <p class="price">85.00 CHF</p>
+                        <p class="seller">Par Marie Antoinette</p>
+                    </div>
+                </div>
+                
+            </div>
+          <!--  <p style="color:#666; text-align:center; margin-top:2rem;">Aucun article pour l'instant.</p> -->
+            
+        </div>
+    </template>
+
+    <template id="sell">
+        <div class="container">
+            <h2 style="font-size:36px;margin-bottom:8px;">Publier un article</h2>
+            <p class="subtitle">Remplissez les informations ci-dessous</p>
+
+            <form class="form">
+
+                <div class="field">
+                    <label>Titre *</label>
+                    <input type="text" placeholder="Appareil photo vintage Minolta X-700" />
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <label>Prix * (CHF)</label>
+                        <input type="number" placeholder="120" />
+                    </div>
+                    <div class="field">
+                        <label>Catégorie</label>
+                        <select>
+                            <option selected>Électronique</option>
+                            <option>Mode</option>
+                            <option>Maison</option>
+                            <option>Sport</option>
+                            <option>Art</option>
+                            <option>Livres</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Description</label>
+                    <textarea
+                        placeholder="Minolta X-700 en excellent état, livré avec objectif 50mm f/1.4. Quelques légères traces d'usure sur le boîtier mais optique impeccable."></textarea>
+                    <p class="char-count">142 / 500 caractères</p>
+                </div>
+
+                <div class="field">
+                    <label>URL de l'image (optionnel)</label>
+                    <input type="text"
+                        value="https://images.unsplash.com/photo-1452457807411-4979b707c5be?w=600&q=80" />
+                </div>
+
+                <!-- Image preview -->
+                <img class="img-preview" src="https://images.unsplash.com/photo-1452457807411-4979b707c5be?w=600&q=80"
+                    alt="Aperçu" />
+
+                <button class="btn-gold" type="submit">Publier l'article</button>
+
+            </form>
+        </div>
+    </template>
+
+    <template id="login">
+        <div class="page-box">
+            <h2>Connexion</h2>
+            <form>
+                <label for="email">EMAIL</label>
+                <input type="email" placeholder="vous@example.com">
+                <label for="password">MOT DE PASSE</label>
+                <input type="password" placeholder="********">
+                <button type="submit">Se connecter</button>
+                <span>Pas de compte ? <a href="/register">S'inscrire</a></span>
+            </form>
+        </div>
+    </template>
+
+    <template id="register">
+        <div class="page-box">
+            <h2>Créer un compte</h2>
+            <form>
+                <label for="NOM COMPLET">NOM COMPLET</label>
+                <input type="text" placeholder="Jean Dupont">
+                <label for="email">EMAIL</label>
+                <input type="email" placeholder="vous@example.com">
+                <label for="password">MOT DE PASSE</label>
+                <input type="password" placeholder="Min. 6 caratères">
+                <label for="">CONFIRMER LE MOT DE PASSE</label>
+                <input type="password" placeholder="*****">
+                <button type="submit">Créer mon compte</button>
+                <span>Deja un compte ? <a href="/login">Se connecter</a></span>
+            </form>
+        </div>
+    </template>
+
+    <template id="profil">
+        <div class="container">
+
+           
+            <div class="profile-header">
+                <div class="avatar">
+                    <img src="https://i.pravatar.cc/150?img=47" alt="Avatar" />
+                </div>
+                <div class="profile-info">
+                    <h2 class="profile-name">Sophie Martin</h2>
+                    <p class="profile-email">sophie.martin@exemple.com</p>
+                    <p class="profile-bio">Passionnée de design et objets vintage. Je vends uniquement des articles que
+                        j'aime !</p>
+                    <div class="stats">
+                        <span class="stat"><strong>3</strong> annonces</span>
+                        <span class="stat"><strong>2</strong> achats</span>
+                    </div>
+                </div>
+                <button class="btn-edit" onclick="toggleEdit()">Modifier</button>
+            </div>
+
+            
+            <div class="edit-panel" id="editPanel">
+                <h3>Modifier le profil</h3>
+                <div class="edit-form">
+                    <div>
+                        <label>Nom</label>
+                        <input type="text" value="Sophie Martin" />
+                    </div>
+                    <div>
+                        <label>Bio</label>
+                        <textarea>Passionnée de design et objets vintage. Je vends uniquement des articles que j'aime !</textarea>
+                    </div>
+                    <div>
+                        <label>URL photo de profil</label>
+                        <input type="text" value="https://i.pravatar.cc/150?img=47" placeholder="https://…" />
+                    </div>
+                    <button class="btn-gold">Enregistrer</button>
+                </div>
+            </div>
+
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('listings', this)">Mes annonces <span
+                        class="tab-count">(3)</span></button>
+                <button class="tab" onclick="switchTab('purchases', this)">Mes achats <span
+                        class="tab-count">(2)</span></button>
+            </div>
+
+            
+            <div id="listingsTab">
+                <div class="listing-row">
+                    <img class="listing-thumb"
+                        src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=120&q=80" alt="" />
+                    <div class="listing-info">
+                        <p class="listing-title">Aquarelle originale — Lac Léman</p>
+                        <p class="listing-cat">Art</p>
+                    </div>
+                    <div style="text-align:right">
+                        <p class="listing-price">CHF 200.00</p>
+                    </div>
+                </div>
+                <div class="listing-row">
+                    <img class="listing-thumb"
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" alt="" />
+                    <div class="listing-info">
+                        <p class="listing-title">Collection Harry Potter complète</p>
+                        <p class="listing-cat">Livres</p>
+                    </div>
+                    <div style="text-align:right">
+                        <p class="listing-price">CHF 55.00</p>
+                    </div>
+                </div>
+                <div class="listing-row">
+                    <img class="listing-thumb"
+                        src="https://images.unsplash.com/photo-1452457807411-4979b707c5be?w=120&q=80" alt="" />
+                    <div class="listing-info">
+                        <p class="listing-title">Appareil photo vintage Minolta</p>
+                        <p class="listing-cat">Électronique</p>
+                    </div>
+                    <div style="text-align:right">
+                        <p class="listing-price">CHF 120.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purchases tab (hidden) -->
+            <div id="purchasesTab" style="display:none">
+                <div class="listing-row">
+                    <img class="listing-thumb"
+                        src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=120&q=80" alt="" />
+                    <div class="listing-info">
+                        <p class="listing-title">Vélo de ville hollandais</p>
+                        <p class="listing-cat">Vendu par Luc Bernard</p>
+                    </div>
+                    <div style="text-align:right">
+                        <p class="listing-price">CHF 320.00</p>
+                        <p class="listing-date">24/02/2025</p>
+                    </div>
+                </div>
+                <div class="listing-row">
+                    <img class="listing-thumb"
+                        src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=120&q=80" alt="" />
+                    <div class="listing-info">
+                        <p class="listing-title">Lampe de bureau mid-century</p>
+                        <p class="listing-cat">Vendu par Luc Bernard</p>
+                    </div>
+                    <div style="text-align:right">
+                        <p class="listing-price">CHF 65.00</p>
+                        <p class="listing-date">20/02/2025</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </template>
+    <script src="script.js"></script>
+</body>
+
+</html>
