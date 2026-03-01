@@ -77,6 +77,24 @@ async function render(path) {
             });
         });
     }
+    if (templateId === 'sell') {
+        const idUser = localStorage.getItem('id');
+        if (!idUser) {
+            history.pushState({}, '', '/login');
+            render('/login');
+            return;
+        }
+    }
+    if (templateId === 'register') {
+        const form = document.getElementById('register-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fullname = document.getElementById('register-fullname').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+        });
+    }
 }
 document.addEventListener('click', (e) => {
     const el = e.target.closest('[data-link]');
@@ -89,4 +107,10 @@ document.addEventListener('click', (e) => {
 });
 window.addEventListener('popstate', () => render(location.pathname));
 render(location.pathname === '/' ? '/home' : location.pathname);
+function ShowNotification(text, type) {
+    const messageContainer = document.querySelector('.message-app');
+    messageContainer.textContent = text;
+    messageContainer.classList.add(type === 'success' ? 'active-success' : 'active-error');
+    setTimeout(() => { messageContainer.classList.remove(type === 'success' ? 'active-success' : 'active-error'); }, 4000);
+}
 //# sourceMappingURL=index.js.map

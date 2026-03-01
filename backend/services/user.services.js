@@ -7,7 +7,8 @@ exports.create = async (Fullname, email, password, bio) => {
         avatar_url, bio) 
         VALUES (?, ?, ?, null, ?)
     `, [Fullname, email , password, bio]);
-    return rows.affectedRows > 0;
+    return rows.affectedRows > 0 ? { success: true, message: 'Compte créé'} : 
+    { success: false, message: 'Création du compte échoué'};
 };
 
 exports.updateById = async (Fullname, bio, avatar_url, id) => {

@@ -2,6 +2,8 @@ import ProductServices from '../shared/Product.js';
 
 const app = document.getElementById('app') as HTMLElement;
 
+
+
 const routes: Record<string, string> = {
     '/home': 'home',
     '/sell': 'sell',
@@ -35,10 +37,10 @@ async function render(path: string): Promise<void> {
         });
     });
 
-    if (templateId === 'home') { 
+    if (templateId === 'home') {
         const productService = new ProductServices();
         const products = await productService.getAll();
-        const cardDisplay = app.querySelector('.card-display'); 
+        const cardDisplay = app.querySelector('.card-display');
 
         products?.forEach((item) => {
             const div = document.createElement('div');
@@ -81,6 +83,33 @@ async function render(path: string): Promise<void> {
             });
         });
     }
+
+    if (templateId === 'sell') {
+        const idUser = localStorage.getItem('id');
+        if (!idUser) {
+            history.pushState({}, '', '/login');
+            render('/login');
+            return;
+        }
+    }
+
+    if (templateId === 'register') {
+
+        const form = document.getElementById('register-form') as HTMLFormElement;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const fullname = (document.getElementById('register-fullname') as HTMLInputElement).value;
+            const email = (document.getElementById('register-email') as HTMLInputElement).value;
+            const password = (document.getElementById('register-password') as HTMLInputElement).value;
+            const confirmPassword = (document.getElementById('register-confirm-password') as HTMLInputElement).value;
+
+            
+        });
+
+
+    }
 }
 
 document.addEventListener('click', (e: MouseEvent) => {
@@ -94,3 +123,11 @@ document.addEventListener('click', (e: MouseEvent) => {
 
 window.addEventListener('popstate', () => render(location.pathname));
 render(location.pathname === '/' ? '/home' : location.pathname);
+
+function ShowNotification(text: string, type: string) {
+
+    const messageContainer = document.querySelector<HTMLLIElement>('.message-app');
+    messageContainer!.textContent = text;
+    messageContainer!.classList.add(type === 'success' ? 'active-success' : 'active-error');
+    setTimeout(() => { messageContainer!.classList.remove(type === 'success' ? 'active-success' : 'active-error') }, 4000)
+}
