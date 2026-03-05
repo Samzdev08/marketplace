@@ -76,40 +76,49 @@ main {
 }
 
 .message-app {
-
-    position: absolute;
-    top: 15%;
-    right: 6%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 20px;
+    position: fixed;
+    top: 120px;
+    right: 60px;
+    padding: 12px 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+    width: fit-content;     
+    max-width: 400px;        
+    white-space: nowrap; 
+}
+.active-success, .active-error {
+    visibility: visible;
+    opacity: 1;
+    animation: slide-in 0.5s ease-in-out;
+    border-radius: var(--r);
 }
 
 .active-success {
-    display: block;
-    animation: slide-in 0.5s ease-in-out;
     background: var(--success-bg);
     color: var(--success);
     border: 1px solid var(--success-border);
-    border-radius: var(--r);
 }
 
 .active-error {
-    display: block;
-    animation: slide-in 0.5s ease-in-out;
     background: var(--danger-bg);
     color: var(--danger);
     border: 1px solid var(--danger-border);
-    border-radius: var(--r);
+}
+
+.fade-out {
+    animation: fade-out 0.5s ease forwards;
 }
 
 @keyframes slide-in {
+    from { transform: translateX(350px); opacity: 0; }
+    to   { transform: translateX(0);     opacity: 1; }
+}
 
-    0% {
-        transform: translateX(550px);
-    }
-
+@keyframes fade-out {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(350px); }
 }
 
 

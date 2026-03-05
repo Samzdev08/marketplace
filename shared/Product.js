@@ -1,7 +1,7 @@
 export default class ProductServices {
     urlbase;
     constructor() {
-        this.urlbase = 'http://localhost:3000/api/products';
+        this.urlbase = 'http://localhost:3001/api/products';
     }
     async getAll() {
         try {

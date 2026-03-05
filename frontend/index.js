@@ -1,4 +1,5 @@
 import ProductServices from '../shared/Product.js';
+import UserServices from '../shared/User.js';
 const app = document.getElementById('app');
 const routes = {
     '/home': 'home',
@@ -8,6 +9,7 @@ const routes = {
     '/profil': 'profil'
 };
 async function render(path) {
+    const message = document.querySelector('.message-app');
     const templateId = routes[path] || 'home';
     const tpl = document.getElementById(templateId);
     if (!tpl)
@@ -87,12 +89,58 @@ async function render(path) {
     }
     if (templateId === 'register') {
         const form = document.getElementById('register-form');
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const fullname = document.getElementById('register-fullname').value;
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('register-confirm-password').value;
+            const data = {
+                fullname: fullname,
+                email: email,
+                password: password,
+                password_verify: confirmPassword
+            };
+            const userService = new UserServices();
+            const result = await userService.create(data);
+            console.log(result);
+            if (result.type === 'error') {
+                showNotif(result.type, result.message);
+            }
+            else {
+                showNotif(result.type, result.message);
+                setTimeout(() => {
+                    history.pushState({}, '', '/login');
+                    render('/login');
+                    return;
+                }, 1500);
+            }
+        });
+    }
+    if (templateId === 'login') {
+        const form = document.getElementById('login-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const data = {
+                email: email,
+                password: password,
+            };
+            const userService = new UserServices();
+            const result = await userService.auth(data);
+            console.log(result);
+            if (result.type === 'error') {
+                showNotif(result.type, result.message);
+            }
+            else {
+                showNotif(result.type, result.message);
+                setTimeout(() => {
+                    history.pushState({}, '', '/');
+                    render('/');
+                    return;
+                }, 1500);
+            }
         });
     }
 }
@@ -107,10 +155,16 @@ document.addEventListener('click', (e) => {
 });
 window.addEventListener('popstate', () => render(location.pathname));
 render(location.pathname === '/' ? '/home' : location.pathname);
-function ShowNotification(text, type) {
-    const messageContainer = document.querySelector('.message-app');
-    messageContainer.textContent = text;
-    messageContainer.classList.add(type === 'success' ? 'active-success' : 'active-error');
-    setTimeout(() => { messageContainer.classList.remove(type === 'success' ? 'active-success' : 'active-error'); }, 4000);
+function showNotif(type, text) {
+    const message = document.querySelector('.message-app');
+    message.classList.remove('active-error', 'active-success', 'fade-out');
+    message.textContent = text;
+    message.classList.add(type === 'error' ? 'active-error' : 'active-success');
+    setTimeout(() => {
+        message.classList.add('fade-out');
+        setTimeout(() => {
+            message.classList.remove('active-error', 'active-success', 'fade-out');
+        }, 500);
+    }, 3000);
 }
 //# sourceMappingURL=index.js.map

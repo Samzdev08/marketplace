@@ -1,4 +1,5 @@
 import ProductServices from '../shared/Product.js';
+import UserServices from '../shared/User.js';
 
 const app = document.getElementById('app') as HTMLElement;
 
@@ -13,6 +14,7 @@ const routes: Record<string, string> = {
 };
 
 async function render(path: string): Promise<void> {
+    const message = document.querySelector<HTMLDivElement>('.message-app');
     const templateId = routes[path] || 'home';
     const tpl = document.getElementById(templateId) as HTMLTemplateElement | null;
     if (!tpl) return;
@@ -97,7 +99,8 @@ async function render(path: string): Promise<void> {
 
         const form = document.getElementById('register-form') as HTMLFormElement;
 
-        form.addEventListener('submit', (e) => {
+
+        form.addEventListener('submit', async (e: Event) => {
             e.preventDefault();
 
             const fullname = (document.getElementById('register-fullname') as HTMLInputElement).value;
@@ -105,10 +108,80 @@ async function render(path: string): Promise<void> {
             const password = (document.getElementById('register-password') as HTMLInputElement).value;
             const confirmPassword = (document.getElementById('register-confirm-password') as HTMLInputElement).value;
 
-            
+            const data = {
+
+                fullname: fullname,
+                email: email,
+                password: password,
+                password_verify: confirmPassword
+            }
+
+            const userService = new UserServices();
+            const result = await userService.create(data);
+
+            console.log(result);
+
+            if (result.type === 'error') {
+
+                showNotif(result.type, result.message);
+
+
+            } else {
+
+                showNotif(result.type, result.message);
+                setTimeout(() => {
+
+                    history.pushState({}, '', '/login');
+                    render('/login');
+                    return;
+                }, 1500)
+
+
+            }
+
+
         });
+    }
+
+    if (templateId === 'login') {
+
+        const form = document.getElementById('login-form') as HTMLFormElement;
 
 
+        form.addEventListener('submit', async (e: Event) => {
+            e.preventDefault();
+
+
+            const email = (document.getElementById('login-email') as HTMLInputElement).value;
+            const password = (document.getElementById('login-password') as HTMLInputElement).value;
+            const data = {
+                email: email,
+                password: password,
+            }
+
+            const userService = new UserServices();
+            const result = await userService.auth(data);
+
+            console.log(result);
+
+            if (result.type === 'error') {
+
+                showNotif(result.type, result.message);
+
+            } else {
+
+                showNotif(result.type, result.message);
+                const idUser = result.id
+                localStorage.setItem('id', idUser)
+                setTimeout(() => {
+
+                    history.pushState({}, '', '/');
+                    render('/');
+                    return;
+                }, 1500)
+
+            }
+        });
     }
 }
 
@@ -124,10 +197,48 @@ document.addEventListener('click', (e: MouseEvent) => {
 window.addEventListener('popstate', () => render(location.pathname));
 render(location.pathname === '/' ? '/home' : location.pathname);
 
-function ShowNotification(text: string, type: string) {
+function showNotif(type: 'error' | 'success', text: string) {
+    const message = document.querySelector('.message-app') as HTMLElement;
 
-    const messageContainer = document.querySelector<HTMLLIElement>('.message-app');
-    messageContainer!.textContent = text;
-    messageContainer!.classList.add(type === 'success' ? 'active-success' : 'active-error');
-    setTimeout(() => { messageContainer!.classList.remove(type === 'success' ? 'active-success' : 'active-error') }, 4000)
+
+    message.classList.remove('active-error', 'active-success', 'fade-out');
+    message.textContent = text;
+
+
+    message.classList.add(type === 'error' ? 'active-error' : 'active-success');
+
+
+    setTimeout(() => {
+        message.classList.add('fade-out');
+        setTimeout(() => {
+            message.classList.remove('active-error', 'active-success', 'fade-out');
+        }, 500);
+    }, 3000);
 }
+
+const loginDataLink = document.querySelector<HTMLLinkElement>('a[href="/login"]');
+const registerDataLink = document.querySelector<HTMLLinkElement>('a[href="/register"]');
+
+
+const idUser = localStorage.getItem('id');
+if (!idUser) {
+
+    loginDataLink!.style.display = "block";
+    registerDataLink!.style.display = "block";
+
+}
+else{
+
+    loginDataLink!.style.display = "none";
+    registerDataLink!.style.display = "none";
+    const profilLink = document.createElement('li');
+    const nav = document.querySelector('nav');
+    profilLink.innerHTML =  `<a href="/profil" data-link="/profil">Mon profil</a>`;
+    nav?.appendChild(profilLink);
+}
+
+
+
+
+
+
