@@ -37,5 +37,5 @@ exports.authentification = async (req, res) => {
     }
     const result = await userService.auth(email, password);
     if (!result.success) return res.status(500).json({ success: false, message: result.message, type: "error" });
-    return res.json({success: true, message: result.message});
+    return res.json({success: true, message: result.message, id: result.id});
 };

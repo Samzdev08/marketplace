@@ -8,6 +8,28 @@ const routes = {
     '/register': 'register',
     '/profil': 'profil'
 };
+function updateNav() {
+    const loginLink = document.querySelector('a[href="/login"]')?.parentElement;
+    const registerLink = document.querySelector('a[href="/register"]')?.parentElement;
+    const nav = document.querySelector('nav');
+    const idUser = localStorage.getItem('id');
+    document.querySelector('a[href="/profil"]')?.parentElement?.remove();
+    if (idUser) {
+        if (loginLink)
+            loginLink.style.display = 'none';
+        if (registerLink)
+            registerLink.style.display = 'none';
+        const profilLink = document.createElement('li');
+        profilLink.innerHTML = `<a href="/profil" data-link="/profil">Mon profil</a>`;
+        nav?.appendChild(profilLink);
+    }
+    else {
+        if (loginLink)
+            loginLink.style.display = 'block';
+        if (registerLink)
+            registerLink.style.display = 'block';
+    }
+}
 async function render(path) {
     const message = document.querySelector('.message-app');
     const templateId = routes[path] || 'home';
@@ -17,6 +39,7 @@ async function render(path) {
     app.innerHTML = '';
     const clone = tpl.content.cloneNode(true);
     app.appendChild(clone);
+    updateNav();
     const list = document.querySelectorAll('nav a');
     let hasActive = false;
     list.forEach(a => {
@@ -135,6 +158,8 @@ async function render(path) {
             }
             else {
                 showNotif(result.type, result.message);
+                const idUser = result.id;
+                localStorage.setItem('id', idUser);
                 setTimeout(() => {
                     history.pushState({}, '', '/');
                     render('/');

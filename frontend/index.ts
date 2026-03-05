@@ -13,6 +13,30 @@ const routes: Record<string, string> = {
     '/profil': 'profil'
 };
 
+function updateNav(): void {
+    const loginLink = document.querySelector<HTMLElement>('a[href="/login"]')?.parentElement;
+    const registerLink = document.querySelector<HTMLElement>('a[href="/register"]')?.parentElement;
+    const nav = document.querySelector('nav');
+    const idUser = localStorage.getItem('id');
+
+
+    document.querySelector('a[href="/profil"]')?.parentElement?.remove();
+
+    if (idUser) {
+
+        if (loginLink) loginLink.style.display = 'none';
+        if (registerLink) registerLink.style.display = 'none';
+
+        const profilLink = document.createElement('li');
+        profilLink.innerHTML = `<a href="/profil" data-link="/profil">Mon profil</a>`;
+        nav?.appendChild(profilLink);
+    } else {
+       
+        if (loginLink) loginLink.style.display = 'block';
+        if (registerLink) registerLink.style.display = 'block';
+    }
+}
+
 async function render(path: string): Promise<void> {
     const message = document.querySelector<HTMLDivElement>('.message-app');
     const templateId = routes[path] || 'home';
@@ -22,6 +46,8 @@ async function render(path: string): Promise<void> {
     app.innerHTML = '';
     const clone = tpl.content.cloneNode(true);
     app.appendChild(clone);
+
+    updateNav();
 
     const list = document.querySelectorAll<HTMLAnchorElement>('nav a');
     let hasActive = false;
@@ -214,27 +240,6 @@ function showNotif(type: 'error' | 'success', text: string) {
             message.classList.remove('active-error', 'active-success', 'fade-out');
         }, 500);
     }, 3000);
-}
-
-const loginDataLink = document.querySelector<HTMLLinkElement>('a[href="/login"]');
-const registerDataLink = document.querySelector<HTMLLinkElement>('a[href="/register"]');
-
-
-const idUser = localStorage.getItem('id');
-if (!idUser) {
-
-    loginDataLink!.style.display = "block";
-    registerDataLink!.style.display = "block";
-
-}
-else{
-
-    loginDataLink!.style.display = "none";
-    registerDataLink!.style.display = "none";
-    const profilLink = document.createElement('li');
-    const nav = document.querySelector('nav');
-    profilLink.innerHTML =  `<a href="/profil" data-link="/profil">Mon profil</a>`;
-    nav?.appendChild(profilLink);
 }
 
 
