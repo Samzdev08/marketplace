@@ -50,8 +50,11 @@ function updateNav(): void {
 async function render(path: string): Promise<void> {
 
     if (path === '/logout') {
+        showNotif('success', 'Déconnexion en cours...', 3000)
         localStorage.removeItem('id');
-        navigate('/home');
+        setTimeout(() => {
+            navigate('/')
+        }, 2500)
         return;
     }
 
@@ -337,7 +340,7 @@ document.addEventListener('click', (e: MouseEvent) => {
 window.addEventListener('popstate', () => render(getCleanPath()));
 render(getCleanPath());
 
-function showNotif(type: 'error' | 'success', text: string) {
+function showNotif(type: 'error' | 'success', text: string, duration: number = 500) {
     const message = document.querySelector('.message-app') as HTMLElement;
     message.classList.remove('active-error', 'active-success', 'fade-out');
     message.textContent = text;
@@ -346,7 +349,7 @@ function showNotif(type: 'error' | 'success', text: string) {
         message.classList.add('fade-out');
         setTimeout(() => {
             message.classList.remove('active-error', 'active-success', 'fade-out');
-        }, 500);
+        }, duration);
     }, 3000);
 }
 

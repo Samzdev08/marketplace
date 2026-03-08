@@ -44,8 +44,11 @@ function updateNav() {
 }
 async function render(path) {
     if (path === '/logout') {
+        showNotif('success', 'Déconnexion en cours...', 3000);
         localStorage.removeItem('id');
-        navigate('/home');
+        setTimeout(() => {
+            navigate('/');
+        }, 2500);
         return;
     }
     const templateId = routes[path] || 'home';
@@ -301,7 +304,7 @@ document.addEventListener('click', (e) => {
 });
 window.addEventListener('popstate', () => render(getCleanPath()));
 render(getCleanPath());
-function showNotif(type, text) {
+function showNotif(type, text, duration = 500) {
     const message = document.querySelector('.message-app');
     message.classList.remove('active-error', 'active-success', 'fade-out');
     message.textContent = text;
@@ -310,7 +313,7 @@ function showNotif(type, text) {
         message.classList.add('fade-out');
         setTimeout(() => {
             message.classList.remove('active-error', 'active-success', 'fade-out');
-        }, 500);
+        }, duration);
     }, 3000);
 }
 const emptyMessage = (text) => `
