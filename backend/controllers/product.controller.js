@@ -51,11 +51,18 @@ exports.createProduct = (req, res) => {
             return res.status(400).json({ message: "Image obligatoire.", type: "error" });
         }
 
-        const imagePath =  req.file.path;
+        const imagePath = req.file.path;
 
         const product = await productService.create(idSeller, idCategorie, title, desc, price, imagePath);
         if (!product) return res.status(500).json({ message: "Création impossible.", type: "error" });
 
         return res.json({ message: "Annonce créée avec succès.", type: "success" });
     });
+};
+exports.searchProduct = async (req, res) => {
+    const { category, title, sort } = req.query;
+    console.log(req.query); 
+    const result = await productService.search({ category, title, sort });
+    if (!result.success) return res.status(500).json({ success: false, message: result.message, type: 'error' });
+    return res.json(result.data);
 };

@@ -3,17 +3,25 @@ export default class ProductServices {
     constructor() {
         this.urlbase = 'http://localhost:3001/api/products';
     }
-    async getAll() {
+    async search(filters) {
         try {
-            const response = await fetch(this.urlbase + '/all');
-            const data = await response.json();
-            if (!response.ok)
-                throw new Error(data.message);
-            return data;
+            const params = new URLSearchParams();
+            if (filters.title)
+                params.append('title', filters.title);
+            if (filters.category)
+                params.append('category', filters.category);
+            if (filters.sort)
+                params.append('sort', filters.sort);
+            const url = `${this.urlbase}/search?${params}`;
+            console.log(url);
+            const res = await fetch(url);
+            const data = await res.json();
+            if (!res.ok)
+                return { success: false, data: [], error: data.message };
+            return { success: true, data };
         }
         catch (err) {
-            console.error('Erreur getAll', err.message);
-            return null;
+            return { success: false, data: [], error: err };
         }
     }
 }

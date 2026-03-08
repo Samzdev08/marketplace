@@ -62,6 +62,52 @@ exports.create = async (idSeller, idCategorie, title, desc, price, url) => {
     return result.affectedRows > 0;
 };
 
+exports.search = async (filters = {}) => {
+    try {
+        const { category, title, sort } = filters;
+        const params = [];
+
+        let query = `
+            SELECT
+                l.id,
+                l.title,
+                l.description,
+                l.price,
+                l.image_url,
+                l.status,
+                l.created_at,
+                c.name AS category,
+                u.full_name AS seller_name,
+                u.avatar_url AS seller_avatar
+            FROM listings l
+            JOIN users u ON u.id = l.seller_id
+            JOIN categories c ON c.id = l.category_id
+            WHERE 1=1
+        `;
+
+        if (title) {
+            query += ` AND l.title LIKE ?`;
+            params.push(`%${title}%`);
+        }
+
+        if (category && category !== 'Tous') {
+            query += ` AND c.name = ?`;
+            params.push(category);
+        }
+
+        const orderMap = {
+            price_asc:  'l.price ASC',
+            price_desc: 'l.price DESC',
+            recent:     'l.created_at DESC',
+        };
+        query += ` ORDER BY ${orderMap[sort] ?? 'l.created_at DESC'}`;
+
+        const [rows] = await db.query(query, params);
+        return { success: true, data: rows };
+    } catch (err) {
+        return { success: false, message: err.message };
+    }
+};
 
 
 

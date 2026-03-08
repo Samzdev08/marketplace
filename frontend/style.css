@@ -171,6 +171,12 @@ main {
     outline: none;
     transition: border-color .2s;
 }
+.empty-message {
+    text-align: center;
+    color: #888;
+    padding: 2rem 0;
+    font-style: italic;
+}
 
 .filter-container .filter-tags {
 
@@ -683,6 +689,8 @@ footer p {
 }
 
 .edit-form input[type="text"],
+.edit-form input[type="file"],
+.edit-form input[type="email"],
 .edit-form textarea {
     width: 100%;
     background: var(--bg);

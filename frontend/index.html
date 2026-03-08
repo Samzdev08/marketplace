@@ -14,7 +14,7 @@
 
     <header>
         <div class="header-title">
-            <p data-link="/home">Bazar</p>
+            <p data-link="/home">Bazar</p> 
         </div>
         <nav>
             <li><a href="/home" data-link="/home" class="active-nav">Parcourir</a></li>
@@ -42,7 +42,7 @@
         <div class="hero">
             <h1 style="color: #f0e8d5;">Achetez &amp; vendez</h1>
             <h1 style="color: #c9a84c;">l'extraordinaire.</h1>
-            <p style="font-family: 'DM Sans', sans-serif; font-size: 13px;">0 articles disponibles</p>
+            <p style="font-family: 'DM Sans', sans-serif; font-size: 13px;"><span class="numb"></span> articles disponibles</p>
         </div>
         <div class="product-container">
             <div class="filter-container">
@@ -162,16 +162,15 @@
            
             <div class="profile-header">
                 <div class="avatar">
-                    <img src="https://i.pravatar.cc/150?img=47" alt="Avatar" />
+                    <img src="" alt="Avatar" />
                 </div>
                 <div class="profile-info">
-                    <h2 class="profile-name">Sophie Martin</h2>
-                    <p class="profile-email">sophie.martin@exemple.com</p>
-                    <p class="profile-bio">Passionnée de design et objets vintage. Je vends uniquement des articles que
-                        j'aime !</p>
+                    <h2 class="profile-name"></h2>
+                    <p class="profile-email"></p>
+                    <p class="profile-bio">P</p>
                     <div class="stats">
-                        <span class="stat"><strong>3</strong> annonces</span>
-                        <span class="stat"><strong>2</strong> achats</span>
+                        <span class="stat"><strong></strong> annonces</span>
+                        <span class="stat"><strong></strong> achats</span>
                     </div>
                 </div>
                 <button class="btn-edit" onclick="toggleEdit()">Modifier</button>
@@ -183,15 +182,19 @@
                 <div class="edit-form">
                     <div>
                         <label>Nom</label>
-                        <input id="profile-name" type="text" value="Sophie Martin" />
+                        <input id="profile-name" type="text"/>
                     </div>
                     <div>
-                        <label>Bio</label>
-                        <textarea id="profile-bio">Passionnée de design et objets vintage. Je vends uniquement des articles que j'aime !</textarea>
+                        <label>Email</label>
+                        <input id="profile-email" type="email" >
                     </div>
                     <div>
-                        <label>URL photo de profil</label>
-                        <input id="profile-avatar-url" type="file" value="https://i.pravatar.cc/150?img=47" placeholder="https://…" />
+                        <label>Bio*</label>
+                        <textarea id="profile-bio"></textarea>
+                    </div>
+                    <div>
+                        <label>Photo de profil*</label>
+                        <input id="profile-avatar-url" type="file" accept=".jpg,.jpeg,.png,.webp,.gif" />
                     </div>
                     <button class="btn-gold">Enregistrer</button>
                 </div>
@@ -209,35 +212,35 @@
             <div id="listingsTab">
                 <div class="listing-row">
                     <img class="listing-thumb"
-                        src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=120&q=80" alt="" />
+                        src="" alt="" />
                     <div class="listing-info">
-                        <p class="listing-title">Aquarelle originale — Lac Léman</p>
-                        <p class="listing-cat">Art</p>
+                        <p class="listing-title"></p>
+                        <p class="listing-cat"></p>
                     </div>
                     <div style="text-align:right">
-                        <p class="listing-price">CHF 200.00</p>
+                        <p class="listing-price"></p>
                     </div>
                 </div>
                 <div class="listing-row">
                     <img class="listing-thumb"
-                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" alt="" />
+                        src="" alt="" />
                     <div class="listing-info">
-                        <p class="listing-title">Collection Harry Potter complète</p>
-                        <p class="listing-cat">Livres</p>
+                        <p class="listing-title"></p>
+                        <p class="listing-cat"></p>
                     </div>
                     <div style="text-align:right">
-                        <p class="listing-price">CHF 55.00</p>
+                        <p class="listing-price"></p>
                     </div>
                 </div>
                 <div class="listing-row">
                     <img class="listing-thumb"
-                        src="https://images.unsplash.com/photo-1452457807411-4979b707c5be?w=120&q=80" alt="" />
+                        src="" alt="" />
                     <div class="listing-info">
-                        <p class="listing-title">Appareil photo vintage Minolta</p>
-                        <p class="listing-cat">Électronique</p>
+                        <p class="listing-title"></p>
+                        <p class="listing-cat"></p>
                     </div>
                     <div style="text-align:right">
-                        <p class="listing-price">CHF 120.00</p>
+                        <p class="listing-price"></p>
                     </div>
                 </div>
             </div>
@@ -246,26 +249,26 @@
             <div id="purchasesTab" style="display:none">
                 <div class="listing-row">
                     <img class="listing-thumb"
-                        src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=120&q=80" alt="" />
+                        src="" alt="" />
                     <div class="listing-info">
-                        <p class="listing-title">Vélo de ville hollandais</p>
-                        <p class="listing-cat">Vendu par Luc Bernard</p>
+                        <p class="listing-title"></p>
+                        <p class="listing-cat"></p>
                     </div>
                     <div style="text-align:right">
-                        <p class="listing-price">CHF 320.00</p>
-                        <p class="listing-date">24/02/2025</p>
+                        <p class="listing-price"></p>
+                        <p class="listing-date"></p>
                     </div>
                 </div>
                 <div class="listing-row">
                     <img class="listing-thumb"
-                        src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=120&q=80" alt="" />
+                        src="" alt="" />
                     <div class="listing-info">
-                        <p class="listing-title">Lampe de bureau mid-century</p>
-                        <p class="listing-cat">Vendu par Luc Bernard</p>
+                        <p class="listing-title"></p>
+                        <p class="listing-cat"></p>
                     </div>
                     <div style="text-align:right">
-                        <p class="listing-price">CHF 65.00</p>
-                        <p class="listing-date">20/02/2025</p>
+                        <p class="listing-price"></p>
+                        <p class="listing-date"></p>
                     </div>
                 </div>
             </div>
