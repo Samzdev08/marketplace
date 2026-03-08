@@ -50,7 +50,7 @@ function updateNav(): void {
 async function render(path: string): Promise<void> {
 
     if (path === '/logout') {
-        showNotif('success', 'Déconnexion en cours...', 3000)
+        showNotif('success', 'Déconnexion en cours...', 2800)
         localStorage.removeItem('id');
         setTimeout(() => {
             navigate('/')
